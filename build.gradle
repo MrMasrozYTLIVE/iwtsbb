@@ -1,5 +1,6 @@
 plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
+    id("com.hypherionmc.modutils.modpublisher") version("2.1.6")
 }
 
 version = project.mod_version
@@ -67,5 +68,43 @@ java {
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}" }
+    }
+}
+
+publisher {
+    apiKeys {
+        modrinth System.getenv().MODRINTH_TOKEN
+        github System.getenv().GITHUB_TOKEN
+    }
+
+    setModrinthID(modrinth_id)
+
+    setVersionType(release_type)
+    setChangelog("changelog.md")
+
+    setProjectVersion(mod_version)
+    setDisplayName("IWTSBB ${mod_version}")
+
+    setGameVersions(List.of(minecraft_versions))
+
+    setLoaders("fabric")
+    setCurseEnvironment("client")
+
+    setArtifact(remapJar)
+
+    setDisableMalwareScanner(true)
+
+    setJavaVersions(List.of(JavaVersion.VERSION_21))
+    setDisableEmptyJarCheck(true)
+
+    github {
+        repo = "MrMasrozYTLIVE/iwtsbb"
+        tag = "IWTSBB ${mod_version}"
+        target = "master"
+    }
+
+    modrinthDepends {
+        required "fabric-api", "owo-lib"
+        optional 'modmenu'
     }
 }

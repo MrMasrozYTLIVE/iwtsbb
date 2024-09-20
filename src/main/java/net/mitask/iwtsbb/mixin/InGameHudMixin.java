@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.JumpingMount;
 import net.minecraft.util.Identifier;
 import net.mitask.iwtsbb.Iwtsbb;
@@ -60,7 +59,7 @@ public class InGameHudMixin {
 
     @Unique
     private void renderXP(boolean onMount, DrawContext context, int x) {
-        if(isBarDisabled(XPBar)) return;
+        if(isBarDisabled(XPBar, onMount)) return;
         if(this.client == null || this.client.player == null) throw new IllegalStateException("[IWTSBB] Client or Player is null during rendering XP bar!");
         if(this.client.player.getNextLevelExperience() <= 0) return;
 
@@ -97,6 +96,11 @@ public class InGameHudMixin {
         RenderSystem.disableBlend();
     }
 
+    @Unique
+    private boolean isBarDisabled(ConfigWrapper.BarChoice currentBar, boolean onMount) {
+        if(!Iwtsbb.CONFIG.jumpBarWhenNoMount() && Iwtsbb.CONFIG.leftBar() == Iwtsbb.CONFIG.rightBar() && Iwtsbb.CONFIG.rightBar() == JumpBar && !onMount) return false;
+        return isBarReallyDisabled(currentBar);
+    }
     @Unique
     private boolean isBarDisabled(ConfigWrapper.BarChoice currentBar) {
         if(!Iwtsbb.CONFIG.jumpBarWhenNoMount() && Iwtsbb.CONFIG.leftBar() == Iwtsbb.CONFIG.rightBar() && Iwtsbb.CONFIG.rightBar() == JumpBar) return false;

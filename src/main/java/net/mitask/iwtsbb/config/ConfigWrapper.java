@@ -5,6 +5,7 @@ import io.wispforest.owo.config.annotation.Modmenu;
 
 @Modmenu(modId = "iwtsbb")
 @Config(name = "iwtsbb", wrapperName = "IwtsbbConfig")
+@SuppressWarnings("unused")
 public class ConfigWrapper {
     public BarChoice leftBar = BarChoice.XP;
     public BarChoice rightBar = BarChoice.JUMP;
