@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "iwtsbb",
+  "version": "${version}",
+  "name": "IWantToSeeBothBars",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/iwtsbb/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.mitask.iwtsbb.Iwtsbb"
+    ]
+  },
+  "mixins": [
+    "iwtsbb.mixins.json"
+  ],
+  "accessWidener": "iwtsbb.accesswidener",
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": ">=${minecraft_version}",
+    "owo-lib": "${owo_version}",
+    "fabric-api": "${fabric_api}"
+  }
+}

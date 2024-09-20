@@ -1,0 +1,8 @@
+{
+    "text.config.iwtsbb.title": "IWantToSeeBothBars (IWTSBB)",
+    "text.config.iwtsbb.option.leftBar": "Left Bar",
+    "text.config.iwtsbb.option.rightBar": "Right Bar",
+    "text.config.iwtsbb.option.jumpBarWhenNoMount": "Jump bar without mount",
+    "text.config.iwtsbb.enum.barChoice.xp": "XP",
+    "text.config.iwtsbb.enum.barChoice.jump": "Jump"
+}
