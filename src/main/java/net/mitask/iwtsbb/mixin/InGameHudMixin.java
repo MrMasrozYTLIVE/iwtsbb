@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.JumpingMount;
 import net.minecraft.util.Identifier;
 import net.mitask.iwtsbb.Iwtsbb;
@@ -69,9 +70,9 @@ public class InGameHudMixin {
         x += getXModifier(XPBar, onMount);
 
         RenderSystem.enableBlend();
-        context.drawGuiTexture(EXPERIENCE_BAR_BACKGROUND_TEXTURE, x, y, barWidth, 5);
+        context.drawGuiTexture(RenderLayer::getGuiTextured, EXPERIENCE_BAR_BACKGROUND_TEXTURE, x, y, barWidth, 5);
         if (xpProgress > 0) {
-            context.drawGuiTexture(EXPERIENCE_BAR_PROGRESS_TEXTURE, barWidth, 5, 0, 0, x, y, xpProgress, 5);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, EXPERIENCE_BAR_PROGRESS_TEXTURE, barWidth, 5, 0, 0, x, y, xpProgress, 5);
         }
         RenderSystem.disableBlend();
     }
@@ -87,11 +88,11 @@ public class InGameHudMixin {
         x += getXModifier(JumpBar, mount != null);
 
         RenderSystem.enableBlend();
-        context.drawGuiTexture(JUMP_BAR_BACKGROUND_TEXTURE, x, y, barWidth, 5);
+        context.drawGuiTexture(RenderLayer::getGuiTextured, JUMP_BAR_BACKGROUND_TEXTURE, x, y, barWidth, 5);
         if (mount != null && mount.getJumpCooldown() > 0) {
-            context.drawGuiTexture(JUMP_BAR_COOLDOWN_TEXTURE, x, y, barWidth, 5);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, JUMP_BAR_COOLDOWN_TEXTURE, x, y, barWidth, 5);
         } else if (jumpStrength > 0) {
-            context.drawGuiTexture(JUMP_BAR_PROGRESS_TEXTURE, barWidth, 5, 0, 0, x, y, jumpStrength, 5);
+            context.drawGuiTexture(RenderLayer::getGuiTextured, JUMP_BAR_PROGRESS_TEXTURE, barWidth, 5, 0, 0, x, y, jumpStrength, 5);
         }
         RenderSystem.disableBlend();
     }
